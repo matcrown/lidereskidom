@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KiDOM ACADEMY: S13 - D1 - Agilidad Cognitiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Raleway:wght@800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --kidom-blue: #2667ff;
+            --kidom-yellow-accent: #FBBF24; 
+            --medium-text: #4B5563; 
+        }
+
+        html, body {
+            height: 100%; width: 100%; margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif; overflow: hidden;
+            background-color: var(--medium-text);
+        }
+
+        #slides-container { width: 100%; height: 100%; display: flex; position: relative; }
+        
+        .slide {
+            flex-shrink: 0; width: 100%; height: 100%;
+            display: none; flex-direction: column; position: relative; overflow: hidden;
+        }
+        @media (min-width: 768px) { .slide { flex-direction: row; } }
+        .slide.active { display: flex; }
+
+        .image-column {
+            width: 100%; background-color: #FFFFFF; padding: 2rem; box-sizing: border-box; 
+            display: flex; flex-direction: column; justify-content: space-between; 
+            align-items: center; height: 50%; border: 2mm solid var(--kidom-blue); border-right: none;
+        }
+        @media (min-width: 768px) { .image-column { width: 50%; height: 100%; } }
+
+        .image-column-wrapper {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            width: 100%; height: 100%; position: relative;
+        }
+
+        .top-logo-placeholder { max-width: 300px; height: 80px; flex-shrink: 0; margin-bottom: 1rem; }
+        .top-logo-placeholder img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .image-guide {
+            width: 100%; height: 100%; max-width: 90%; max-height: 48vh; 
+            display: flex; align-items: center; justify-content: center; flex-grow: 1; 
+            background-color: #FFFFFF; color: var(--kidom-blue); overflow: hidden;
+        }
+        .image-guide img { width: 100%; height: 100%; object-fit: contain; }
+
+        .bottom-values-container { position: relative; width: 90%; flex-shrink: 0; margin-top: 1rem; padding-bottom: 0.5rem; }
+        .value-line { display: flex; justify-content: center; flex-wrap: nowrap; gap: 0.75rem; }
+        .value-item { font-weight: 700; color: var(--medium-text); font-size: 0.84rem; text-transform: uppercase;}
+        .lider-letter { 
+            background-color: var(--medium-text); color: #FFFFFF; font-weight: 900; 
+            font-size: 0.875rem; border-radius: 50%; width: 1.75rem; height: 1.75rem; 
+            display: inline-flex; align-items: center; justify-content: center; margin-right: 0.25rem;
+        }
+
+        .content-column {
+            width: 100%; background-color: var(--kidom-blue); color: #FFFFFF; padding: 2rem; 
+            box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; 
+            height: 50%; border-top: 2mm solid var(--kidom-yellow-accent); 
+            border-right: 2mm solid var(--kidom-yellow-accent); border-bottom: 2mm solid var(--kidom-yellow-accent);
+        }
+        @media (min-width: 768px) { .content-column { width: 50%; height: 100%; } }
+
+        .logo-container { flex-shrink: 0; margin-bottom: 0.5rem; position: relative; min-height: 50px; } 
+        .logo-placeholder { position: absolute; top: -3.25rem; right: -3.75rem; width: 142px; height: 142px; z-index: 15; padding: 1rem; box-sizing: border-box; cursor: pointer;}
+        .logo-placeholder img { width: 100%; height: 100%; object-fit: contain;}
+        
+        .main-content-wrapper { display: flex; flex-direction: column; flex-grow: 1; min-height: 0; }
+        .content-header-area { padding-top: 2.5rem; flex-shrink: 0; }
+        .phase-title { color: #FFFFFF; font-size: 1.125rem; font-weight: 700; opacity: 0.8; }
+        .activity-title { color: #FFFFFF; font-size: 1.925rem; line-height: 1.1; font-weight: 900; text-transform: uppercase; margin: 0.5rem 0; }
+        .group-name-display { color: var(--kidom-yellow-accent); font-size: 1.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem; } 
+        
+        .instructions-list { text-align: left; font-size: 1.4rem; color: #F3F4F6; list-style: none; padding-left: 0; overflow-y: auto; flex-grow: 1; }
+        .instructions-list li { margin-bottom: 1.2rem; }
+        .list-title { display: flex; align-items: center; font-weight: 700; color: #FFFFFF; }
+        .list-icon { margin-right: 0.75rem; font-size: 1.5rem; color: var(--kidom-yellow-accent); flex-shrink: 0; }
+        .list-text { padding-left: 2.5rem; color: #F3F4F6; font-weight: 400; }
+
+        .content-bottom { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; padding-top: 1rem; flex-shrink: 0; }
+        .timer-display { font-family: 'Raleway', sans-serif; font-weight: 800; color: var(--kidom-yellow-accent); font-size: 6rem; line-height: 1; font-variant-numeric: tabular-nums; }
+        .navigation-buttons { display: flex; gap: 0.5rem; }
+        .nav-button { background-color: #FFFFFF; color: var(--kidom-blue); font-weight: 700; font-size: 1.125rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; border: none; }
+        .nav-button:disabled { opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+    <div id="slides-container">
+
+        <div class="slide active" data-duration="300">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/bJX8lyr.png" alt="Saludo"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line">
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-container">
+                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                </div>
+                <div class="main-content-wrapper">
+                    <div class="content-header-area">
+                        <h2 class="phase-title">Fase 1 de 6: Saludo</h2>
+                        <h3 class="activity-title">SALUDO DEL CÓDIGO</h3>
+                        <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    </div>
+                    <ul class="instructions-list">
+                        <li>
+                            <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
+                            <div class="list-text">Si menciono tu color, ¡ejecuta tu acción! AZUL: Salta. ROJO: Gira. ¡Mente activa, Líderes!</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
+                            <div class="list-text">"Mi mente procesa rápido y mi cuerpo responde con precisión inmediata."</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-bottom">
+                    <div class="timer-display">05:00</div>
+                    <div class="navigation-buttons">
+                        <button class="nav-button prevBtn" onclick="navigate(-1)" disabled>Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="600">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/gJDA2wh.png" alt="Escaladores"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line">
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-container">
+                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                </div>
+                <div class="main-content-wrapper">
+                    <div class="content-header-area">
+                        <h2 class="phase-title">Fase 2 de 6: Fundamentos</h2>
+                        <h3 class="activity-title">ESCALADORES "BRAVO-ECO"</h3>
+                        <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    </div>
+                    <ul class="instructions-list">
+                        <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Plancha alta. BRAVO: Rodilla derecha. ECO: Rodilla izquierda. ¡Atentos al cambio de ritmo!</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
+                            <div class="list-text">"Mantengan el core firme como una roca. ¡Bravo! ¡Eco! ¡Bravo-Bravo!"</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-bottom">
+                    <div class="timer-display">10:00</div>
+                    <div class="navigation-buttons">
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="900">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/YRn8Zij.png" alt="Torre"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line">
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-container">
+                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                </div>
+                <div class="main-content-wrapper">
+                    <div class="content-header-area">
+                        <h2 class="phase-title">Fase 3 de 6: Hito</h2>
+                        <h3 class="activity-title">TORRE DE PRECISIÓN KiDOM</h3>
+                        <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    </div>
+                    <ul class="instructions-list">
+                        <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Por turnos, apilar un platillo a la vez. El último equipo paga penitencia (5 Saltos).</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
+                            <div class="list-text">"¡Velocidad constante y manos de seda! No dejen que la torre de su grupo colapse."</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-bottom">
+                    <div class="timer-display">15:00</div>
+                    <div class="navigation-buttons">
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="900">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/FbcdRps.png" alt="Francotiradores"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line">
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-container">
+                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                </div>
+                <div class="main-content-wrapper">
+                    <div class="content-header-area">
+                        <h2 class="phase-title">Fase 4 de 6: Mover y Aprender</h2>
+                        <h3 class="activity-title">CÍRCULO DE FRANCOTIRADORES</h3>
+                        <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    </div>
+                    <ul class="instructions-list">
+                        <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Correr en círculo. Al silbato, lanzar la pelota para derribar el platillo central.</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
+                            <div class="list-text">"¡Foco láser! En el caos del trote, encuentren su objetivo. ¡FUEGO!"</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
+                            <div class="list-text">"Mantengo mi objetivo a la vista incluso cuando estoy en constante movimiento."</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-bottom">
+                    <div class="timer-display">15:00</div>
+                    <div class="navigation-buttons">
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="420">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/H0OswMz.png" alt="Puente"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line">
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-container">
+                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                </div>
+                <div class="main-content-wrapper">
+                    <div class="content-header-area">
+                        <h2 class="phase-title">Fase 5 de 6: Reto de Equipo</h2>
+                        <h3 class="activity-title">EL PUENTE DE SUSPENSIÓN</h3>
+                        <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    </div>
+                    <ul class="instructions-list">
+                        <li>
+                            <div class="list-title"><span class="list-icon">⚙️</span> <strong>Ejecución:</strong></div>
+                            <div class="list-text">Línea en plancha lateral. Pasar el balón de mano en mano sin tocar el suelo.</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
+                            <div class="list-text">"¡Somos una estructura de poder! Confíen en su brazo de apoyo. ¡Sincronicen!"</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-bottom">
+                    <div class="timer-display">07:00</div>
+                    <div class="navigation-buttons">
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)">Sig.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-duration="180">
+            <div class="image-column">
+                <div class="image-column-wrapper">
+                    <div class="top-logo-placeholder"><img src="https://i.imgur.com/7G8CoRs.png"></div>
+                    <div class="image-guide"><img src="https://i.imgur.com/GNnscx9.png" alt="Cierre"></div>
+                    <div class="bottom-values-container">
+                        <div class="value-line">
+                            <span class="value-item"><span class="lider-letter">L</span>iderazgo</span><span class="value-item"><span class="lider-letter">I</span>ntegridad</span><span class="value-item"><span class="lider-letter">D</span>isciplina</span><span class="value-item"><span class="lider-letter">E</span>mpatía</span><span class="value-item"><span class="lider-letter">R</span>esponsabilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="logo-container">
+                    <div class="logo-placeholder" onclick="resetTimer()"><img src="https://i.imgur.com/nTLHMUv.png"></div>
+                </div>
+                <div class="main-content-wrapper">
+                    <div class="content-header-area">
+                        <h2 class="phase-title">Fase 6 de 6: Cierre</h2>
+                        <h3 class="activity-title">ESCANEÓ CORPORAL</h3>
+                        <p class="group-name-display">LÍDERES, SEMANA 13</p>
+                    </div>
+                    <ul class="instructions-list">
+                        <li>
+                            <div class="list-title"><span class="list-icon">📢</span> <strong>Guion:</strong></div>
+                            <div class="list-text">Respiren profundo. Sientan su fuerza interior. Hoy han conquistado un nuevo nivel.</div>
+                        </li>
+                        <li>
+                            <div class="list-title"><span class="list-icon">💡</span> <strong>PNL:</strong></div>
+                            <div class="list-text">"Mi cuerpo es mi fortaleza y hoy lo he entrenado para ser imparable."</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-bottom">
+                    <div class="timer-display">03:00</div>
+                    <div class="navigation-buttons">
+                        <button class="nav-button prevBtn" onclick="navigate(-1)">Ant.</button>
+                        <button class="nav-button nextBtn" onclick="navigate(1)" disabled>Fin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let timerInterval = null;
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function controlTimer(slideElement) {
+            clearInterval(timerInterval);
+            const duration = parseInt(slideElement.dataset.duration, 10);
+            const timerDisplay = slideElement.querySelector('.timer-display');
+            
+            if (!isNaN(duration) && timerDisplay) {
+                let timeLeft = duration;
+                timerDisplay.textContent = formatTime(timeLeft);
+                
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft >= 0) {
+                        timerDisplay.textContent = formatTime(timeLeft);
+                    } else {
+                        clearInterval(timerInterval);
+                        timerDisplay.textContent = "00:00";
+                        navigate(1); 
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            const activeSlideElement = document.querySelector('.slide.active');
+            if (activeSlideElement) controlTimer(activeSlideElement); 
+        }
+
+        function showSlide(index) {
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.display = 'none';
+            });
+            
+            if (slides[index]) {
+                slides[index].classList.add('active');
+                slides[index].style.display = 'flex';
+                currentSlide = index;
+                
+                slides.forEach((s, i) => {
+                    const prev = s.querySelector('.prevBtn');
+                    const next = s.querySelector('.nextBtn');
+                    if(prev) prev.disabled = (i === 0);
+                    if(next) next.disabled = (i === totalSlides - 1);
+                });
+
+                controlTimer(slides[currentSlide]);
+            }
+        }
+
+        function navigate(direction) {
+            const nextSlideIndex = currentSlide + direction;
+            if (nextSlideIndex >= 0 && nextSlideIndex < totalSlides) { 
+                showSlide(nextSlideIndex); 
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             if (slides[0]) showSlide(0);
+
+             document.querySelectorAll('.logo-placeholder').forEach(element => {
+                element.addEventListener('click', resetTimer);
+            });
+             
+             document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') navigate(1);
+                else if (e.key === 'ArrowLeft') navigate(-1);
+            });
+        });
+    </script>
+</body>
+</html>
